@@ -17,6 +17,8 @@ gem 'devise_token_auth'
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular'
   gem 'rails-assets-angular-route'
+  gem 'rails-assets-angular-cookie'
+  gem 'rails-assets-ng-token-auth'
 end
 
 group :development, :test do

@@ -203,8 +203,13 @@ GEM
       railties (= 4.2.3)
       sprockets-rails
     rails-assets-angular (1.4.5)
+    rails-assets-angular-cookie (4.0.9)
+      rails-assets-angular
     rails-assets-angular-route (1.4.5)
       rails-assets-angular (= 1.4.5)
+    rails-assets-ng-token-auth (0.0.27)
+      rails-assets-angular (>= 1.2.0)
+      rails-assets-angular-cookie (>= 4.0.6)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -329,7 +334,9 @@ DEPENDENCIES
   pry-rails
   rails (= 4.2.3)
   rails-assets-angular!
+  rails-assets-angular-cookie!
   rails-assets-angular-route!
+  rails-assets-ng-token-auth!
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

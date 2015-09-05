@@ -3,7 +3,8 @@
   angular
     .module('agilegamification', [
       'ngRoute',
-      'templates'
+      'templates',
+      'ng-token-auth'
     ])
     .config(RoutesDraw);
 
