@@ -18,6 +18,10 @@
           templateUrl: 'home/index.html',
           controller: 'HomeController',
         })
+        .when('/sign_up',{
+          templateUrl: 'registration/new.html',
+          controller: 'RegistrationController'
+        })
         .otherwise({
           redirectTo: '/'
         });
