@@ -13,12 +13,14 @@ gem 'angular-rails-templates'
 gem 'sprockets', '2.12.3'
 gem 'omniauth'
 gem 'devise_token_auth'
+gem 'angular_rails_csrf'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular'
   gem 'rails-assets-angular-route'
   gem 'rails-assets-angular-cookie'
   gem 'rails-assets-ng-token-auth'
+  gem 'rails-assets-bootstrap'
 end
 
 group :development, :test do
