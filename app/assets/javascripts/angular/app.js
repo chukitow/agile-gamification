@@ -40,7 +40,15 @@
           templateUrl: 'sessions/new.html',
           controller: 'SessionsController',
           resolve: {
-            auth: SessionMiddleWare
+            auth: ['$auth', '$location', function($auth, $location){
+              return $auth.validateUser()
+              .then(function(res) {
+                $location.path('/projects');
+              })
+              .catch(function(){
+                return true;
+              });
+            }]
           }
         })
         .when('/sign_out',{
@@ -63,6 +71,13 @@
             auth: SessionMiddleWare
           }
         })
+        .when('/projects/:id/settings',{
+          templateUrl: 'projects/settings.html',
+          controller: 'ProjectSettingsController',
+          resolve: {
+            auth: SessionMiddleWare
+          }
+        })
         .otherwise({
           redirectTo: '/'
         });
@@ -73,7 +88,7 @@
     function SessionMiddleWare($auth, $location){
       return $auth.validateUser()
       .then(function(){
-        $location.path('/projects');
+        return true;
       })
       .catch(function(){
         $location.path('/sign_in');
