@@ -1,0 +1,19 @@
+.col-md-6.col-md-offset-3
+  .signin.box-container
+    %h1.text-center
+      Log in
+    %form(name="loginForm" ng-submit="submitLogin(user)" novalidate="")
+
+      .form-group
+        %input.form-control(type="email" placeholder="Email" ng-model="user.email" required="")
+      .form-group
+        %input.form-control(type="password" placeholder="Password" ng-model="user.password" required="")
+
+      .form-group
+        %button.btn.btn-primary.btn-lg(type="submit" ng-disabled="loginForm.$invalid")
+          Log in
+        or
+        %a(href="/sign_up")
+          Sign up
+        %p.text-danger(ng-show="loginError")
+          {{loginError}}

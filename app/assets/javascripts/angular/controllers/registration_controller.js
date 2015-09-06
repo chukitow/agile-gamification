@@ -5,19 +5,18 @@
 
     RegistrationController.$inject = ['$scope', '$auth', '$location'];
 
-    function RegistrationController($scope, $auth){
+    function RegistrationController($scope, $auth, $location){
 
       $scope.submitRegistration = submitRegistration;
 
       function submitRegistration(user){
         $auth.submitRegistration(user)
+        .then(function(res){
+          $location.path('/projects');
+        })
         .catch(function(res){
           $scope.registrationErrors = res.data.errors.full_messages;
         });
       }
-
-
-      $scope.$on('auth:registration-email-success', function(ev, message) {
-      });
     }
 })();
