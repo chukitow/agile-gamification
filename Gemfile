@@ -21,6 +21,9 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular-cookie'
   gem 'rails-assets-ng-token-auth'
   gem 'rails-assets-bootstrap'
+  gem 'rails-assets-angular-bootstrap'
+  gem 'rails-assets-angular-resource'
+  gem 'rails-assets-angular-ui-notification'
 end
 
 group :development, :test do

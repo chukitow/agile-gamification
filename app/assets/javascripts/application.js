@@ -17,5 +17,8 @@
 //= require angular-route
 //= require angular-cookie
 //= require ng-token-auth
+//= require angular-bootstrap
+//= require angular-resource
 //= require bootstrap
+//= require angular-ui-notification
 //= require_tree .
