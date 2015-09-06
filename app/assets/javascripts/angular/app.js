@@ -4,7 +4,10 @@
     .module('agilegamification', [
       'ngRoute',
       'templates',
-      'ng-token-auth'
+      'ng-token-auth',
+      'ui.bootstrap',
+      'ngResource',
+      'ui-notification'
     ])
     .config(RoutesDraw);
 
