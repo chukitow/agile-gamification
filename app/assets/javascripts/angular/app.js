@@ -78,6 +78,13 @@
             auth: SessionMiddleWare
           }
         })
+        .when('/projects/:id/dashboard',{
+          templateUrl: 'projects/dashboard.html',
+          controller: 'ProjectDashboardController',
+          resolve: {
+            auth: SessionMiddleWare
+          }
+        })
         .otherwise({
           redirectTo: '/'
         });
