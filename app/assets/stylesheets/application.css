@@ -12,6 +12,8 @@
  *
  *= require bootstrap
  *= require angular-ui-notification
+ *= require sb-admin
  *= require_tree .
+ *= require font-awesome
  *= require_self
  */

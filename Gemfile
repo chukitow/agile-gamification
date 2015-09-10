@@ -14,6 +14,7 @@ gem 'sprockets', '2.12.3'
 gem 'omniauth'
 gem 'devise_token_auth'
 gem 'angular_rails_csrf'
+gem 'font-awesome-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular'

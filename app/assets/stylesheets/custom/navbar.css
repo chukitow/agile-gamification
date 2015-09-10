@@ -1,0 +1,30 @@
+.navbar-inverse {
+    background-color: #256188;
+    border-color: #256188;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #FFF;
+}
+
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+    color: #FFF;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #FFF;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+    color: #FFF;
+}
+
+.top-nav > li > a {
+  color: #FFF;
+}
+
+.side-nav {
+    background-color: #256188;
+}

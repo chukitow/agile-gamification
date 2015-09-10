@@ -1,31 +1,32 @@
-.box-container
-  .row
-    .col-md-4
-      %ul.nav.nav-pills.nav-stacked
-        %li.active
-          %a Settings
-        %li
-          %a Overview
-        %li
-          %a Members
+.container
+  .box-container
+    .row
+      .col-md-4
+        %ul.nav.nav-pills.nav-stacked
+          %li.active
+            %a Settings
+          %li
+            %a Overview
+          %li
+            %a Members
 
-    .col-md-8
-      %a.pull-right
-        Go to the project
+      .col-md-8
+        %a.pull-right(ng-href="/projects/{{project.id}}/dashboard")
+          Go to the project
 
-      .section
-        %h4 General
-        %hr
+        .section
+          %h4 General
+          %hr
 
-        .form-information
-          %form(name="settingsForm" ng-submit="updateProject(project)")
-            .form-group
-              %label Name
-              %input.form-control(type="text" ng-model="project.name" name="project_name" required="")
-            .form-group
-              %button.btn.btn-primary(type="submit" ng-disabled="settingsForm.$invalid")Save settings
-      .section
-        %h4 Actions
-        %hr
-        .action
-          %button.btn.btn-danger(ng-click="deleteProject(project)") Delete project
+          .form-information
+            %form(name="settingsForm" ng-submit="updateProject(project)")
+              .form-group
+                %label Name
+                %input.form-control(type="text" ng-model="project.name" name="project_name" required="")
+              .form-group
+                %button.btn.btn-primary(type="submit" ng-disabled="settingsForm.$invalid")Save settings
+        .section
+          %h4 Actions
+          %hr
+          .action
+            %button.btn.btn-danger(ng-click="deleteProject(project)") Delete project
