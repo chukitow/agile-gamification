@@ -111,7 +111,7 @@
     .collapse.navbar-collapse.navbar-ex1-collapse
       %ul.nav.navbar-nav.side-nav
         %li
-          %a{:href => "#"}
+          %a(href="#" ng-click="addStoryModal()")
             %i.fa.fa-fw.fa-plus
             Add story
         %li
@@ -137,3 +137,12 @@
 
   #page-wrapper
     .container-fluid
+      .row
+        .panel.panel-default
+          .panel-heading
+            %h3.panel-title.text-center
+              Current
+          .panel-body
+            .well.story(ng-repeat="story in stories" ng-click="viewStory(story)")
+              %p
+                {{story.name}}
