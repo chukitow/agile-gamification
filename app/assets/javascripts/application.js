@@ -21,4 +21,5 @@
 //= require angular-resource
 //= require bootstrap
 //= require angular-ui-notification
+//= require angular-xeditable
 //= require_tree .

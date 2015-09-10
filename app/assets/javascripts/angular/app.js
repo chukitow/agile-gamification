@@ -7,7 +7,8 @@
       'ng-token-auth',
       'ui.bootstrap',
       'ngResource',
-      'ui-notification'
+      'ui-notification',
+      'xeditable'
     ])
     .config(RoutesDraw);
 
