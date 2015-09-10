@@ -10,6 +10,7 @@
       $scope.openModal     = openModal;
       $scope.createProject = createProject;
       $scope.projects      = Project.query();
+
       var modalInstance;
 
       function openModal() {
@@ -29,6 +30,5 @@
           modalInstance.close();
         });
       }
-
     }
 })();
