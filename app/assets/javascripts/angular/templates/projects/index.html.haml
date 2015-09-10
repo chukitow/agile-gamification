@@ -1,16 +1,17 @@
-%h1.text-center
-  Projects
+.container
+  %h1.text-center
+    Projects
 
-.row
-  .col-md-4(ng-repeat="project in projects")
-    .panel.panel-default
-      .panel-heading
-        %a.panel-title(ng-href="/projects/{{project.id}}/dashboard")
-          {{ project.name }}
-        %a(ng-href="/projects/{{project.id}}/settings")
-          %span.glyphicon.glyphicon-cog
-      .panel-body
-        No description
+  .row
+    .col-md-4(ng-repeat="project in projects")
+      .panel.panel-default
+        .panel-heading
+          %a.panel-title(ng-href="/projects/{{project.id}}/dashboard")
+            {{ project.name }}
+          %a(ng-href="/projects/{{project.id}}/settings")
+            %span.glyphicon.glyphicon-cog
+        .panel-body
+          No description
 
 
-%button.btn.btn-default(ng-click="openModal()") New project
+  %button.btn.btn-default(ng-click="openModal()") New project
