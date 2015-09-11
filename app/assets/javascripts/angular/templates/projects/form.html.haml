@@ -3,8 +3,8 @@
     New Project
 .modal-body
   %form
-  .form-group
-    %input.form-control(placeholder="Name of the project" name="name" ng-model="project.name" type="text" required="")
+    .form-group
+      %input.form-control(placeholder="Name of the project" name="name" ng-model="project.name" type="text" required="")
 .modal-footer
   %button.btn.btn-default(ng-click="$close(this)") Cancel
   %button.btn.btn-primary(ng-disabled="!project.name" ng-click="createProject(project)") Create Project

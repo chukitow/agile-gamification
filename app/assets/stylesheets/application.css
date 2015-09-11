@@ -15,5 +15,6 @@
  *= require sb-admin
  *= require_tree .
  *= require font-awesome
+ *= require angular-xeditable
  *= require_self
  */

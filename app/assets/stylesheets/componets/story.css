@@ -1,0 +1,7 @@
+.story {
+  cursor: pointer;
+}
+
+.story:hover{
+  background-color: #dcdcdc;
+}

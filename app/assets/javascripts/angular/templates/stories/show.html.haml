@@ -1,0 +1,23 @@
+.modal-header
+  %h3.modal-title.text-center(editable-text="story.name" onaftersave="updateStory(story)")
+    {{ story.name }}
+.modal-body
+  .row
+    .col-md-8
+      .description.well
+        %strong
+          Description
+        %a(ng-click="editForm.$show()" ng-hide="editForm.$visible")
+          Edit
+        %div
+          %span(editable-textarea="story.description" e-rows="7" e-cols="40" onaftersave="updateStory(story)" e-form="editForm")
+            {{story.description || 'No description'}}
+
+    .col-md-4
+      .action
+        .action-title
+          %h3 Actions
+        .action-button
+          %button.btn.btn-default.btn-block(ng-click="removeStory(story)")
+            %i.fa.fa-remove
+            Remove

@@ -216,6 +216,8 @@ GEM
     rails-assets-angular-route (1.4.5)
       rails-assets-angular (= 1.4.5)
     rails-assets-angular-ui-notification (0.0.14)
+    rails-assets-angular-xeditable (0.1.9)
+      rails-assets-angular (~> 1.0)
     rails-assets-bootstrap (3.3.5)
       rails-assets-jquery (>= 1.9.1)
     rails-assets-jquery (2.1.4)
@@ -353,6 +355,7 @@ DEPENDENCIES
   rails-assets-angular-resource!
   rails-assets-angular-route!
   rails-assets-angular-ui-notification!
+  rails-assets-angular-xeditable!
   rails-assets-bootstrap!
   rails-assets-ng-token-auth!
   rspec-rails

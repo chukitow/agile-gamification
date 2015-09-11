@@ -1,0 +1,13 @@
+.modal-header
+  %h3.modal-title.text-center
+    New Story
+.modal-body
+  %form
+    .form-group
+      %input.form-control(placeholder="Story title" name="name" ng-model="story.name" type="text" required="")
+    .form-group
+      %textarea.form-control(placeholder="Story description" name="description" ng-model="story.description" rows="5" required="")
+
+.modal-footer
+  %button.btn.btn-default(ng-click="$close(this)") Cancel
+  %button.btn.btn-primary(ng-disabled="!story.name" ng-click="createStory(story)") Create Story
