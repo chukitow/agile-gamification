@@ -8,7 +8,8 @@
       'ui.bootstrap',
       'ngResource',
       'ui-notification',
-      'xeditable'
+      'xeditable',
+      'as.sortable'
     ])
     .config(RoutesDraw);
 

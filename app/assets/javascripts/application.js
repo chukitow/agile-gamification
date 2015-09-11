@@ -22,4 +22,5 @@
 //= require bootstrap
 //= require angular-ui-notification
 //= require angular-xeditable
+//= require ng-sortable
 //= require_tree .
