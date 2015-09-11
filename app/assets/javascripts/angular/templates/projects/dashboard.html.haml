@@ -138,11 +138,16 @@
   #page-wrapper
     .container-fluid
       .row
+        -#%ul(ng-model="stories" as-sortable)
+          -#%li(ng-repeat="story in stories" ng-click="viewStory(story)" as-sortable-item)
+            -#%div(data-as-sortable-item-handle)
+              -#{{story.name}}
         .panel.panel-default
           .panel-heading
             %h3.panel-title.text-center
               Current
-          .panel-body
-            .well.story(ng-repeat="story in stories" ng-click="viewStory(story)")
-              %p
-                {{story.name}}
+          .panel-body(ng-model="stories" as-sortable="dragControls")
+            .well.story(ng-repeat="story in stories" ng-click="viewStory(story)" as-sortable-item)
+              %div(data-as-sortable-item-handle)
+                %p
+                  {{story.name}}
