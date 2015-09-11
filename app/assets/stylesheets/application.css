@@ -16,5 +16,6 @@
  *= require_tree .
  *= require font-awesome
  *= require angular-xeditable
+ *= require ng-sortable
  *= require_self
  */

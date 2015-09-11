@@ -13,6 +13,11 @@
       $scope.removeStory   = removeStory;
       $scope.project       = Project.get({ id: $routeParams.id });
       $scope.stories       = Story.query({ project_id: $routeParams.id });
+      $scope.dragControls  = {
+        accept: dropAccept,
+        itemMoved: itemMoved,
+        orderChanged: orderChanged,
+      };
       var modalInstance;
 
       function addStoryModal(){
@@ -57,5 +62,19 @@
           });
         }
       }
+
+      function dropAccept(sourceItemHandleScope, destSortableScope){
+        return true;
+      }
+
+      function itemMoved(event){
+      }
+
+      function orderChanged(event){
+        var story = $scope.stories[event.dest.index];
+
+        story.$move({ position: event.dest.index + 1});
+      }
+
     }
 })();

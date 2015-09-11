@@ -15,6 +15,7 @@ gem 'omniauth'
 gem 'devise_token_auth'
 gem 'angular_rails_csrf'
 gem 'font-awesome-rails'
+gem 'acts_as_list'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular'
@@ -26,6 +27,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular-resource'
   gem 'rails-assets-angular-ui-notification'
   gem 'rails-assets-angular-xeditable'
+  gem 'rails-assets-ng-sortable'
 end
 
 group :development, :test do

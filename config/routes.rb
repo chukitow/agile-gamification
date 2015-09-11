@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :projects do
-        resources :stories
+        resources :stories do
+          member do
+            put :move
+          end
+        end
       end
     end
   end

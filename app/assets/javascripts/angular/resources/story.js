@@ -12,7 +12,13 @@
         id: '@id'
       },
       {
-        update: { method: 'PUT' }
+        update: {
+          method: 'PUT'
+        },
+        move: {
+          method: 'PUT',
+          url: '/api/v1/projects/:project_id/stories/:id/move'
+        }
       });
     }
 
