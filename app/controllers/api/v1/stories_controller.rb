@@ -1,11 +1,11 @@
 class Api::V1::StoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project
-  before_action :set_story, only: [:update, :destroy]
+  before_action :set_story, only: [:update, :destroy, :move]
   respond_to :json
 
   def index
-    render json: @project.stories, status: :ok
+    render json: @project.stories.order(position: :asc), status: :ok
   end
 
   def create
@@ -32,6 +32,13 @@ class Api::V1::StoriesController < ApplicationController
     else
       render json: @story.errors, status: :unprocessable_entity
     end
+  end
+
+  def move
+    position = params[:position].to_i
+    @story.insert_at(position)
+
+    render json: @story, status: :ok
   end
 
   private
