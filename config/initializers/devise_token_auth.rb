@@ -25,4 +25,5 @@ DeviseTokenAuth.setup do |config|
   # attribute updates. Set it to :password if you want it to be checked only if
   # password is updated.
   # config.check_current_password_before_update = :attributes
+  Devise.secret_key = '8be704db911e2ac1d710a9bec529dc887000df3f637af5924f7d634260dcfa6489c6136e31a175c6ea21c5d0e73e3ae6765f1e0148a8e359f775afce9cc8316e'
 end
