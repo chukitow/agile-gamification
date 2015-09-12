@@ -111,7 +111,7 @@
     .collapse.navbar-collapse.navbar-ex1-collapse
       %ul.nav.navbar-nav.side-nav
         %li
-          %a(href="#" ng-click="addStoryModal()")
+          %a(href="#" ng-click="addStoryModal(false)")
             %i.fa.fa-fw.fa-plus
             Add story
         %li
@@ -138,16 +138,26 @@
   #page-wrapper
     .container-fluid
       .row
-        -#%ul(ng-model="stories" as-sortable)
-          -#%li(ng-repeat="story in stories" ng-click="viewStory(story)" as-sortable-item)
-            -#%div(data-as-sortable-item-handle)
-              -#{{story.name}}
-        .panel.panel-default
-          .panel-heading
-            %h3.panel-title.text-center
-              Current
-          .panel-body(ng-model="stories" as-sortable="dragControls")
-            .well.story(ng-repeat="story in stories" ng-click="viewStory(story)" as-sortable-item)
-              %div(data-as-sortable-item-handle)
-                %p
-                  {{story.name}}
+        .col-md-6
+          .panel.panel-default
+            .panel-heading
+              %h3.panel-title.text-center
+                Backlog
+                %span.glyphicon.glyphicon-plus.pull-right(ng-click="addStoryModal(true)")
+            .panel-body(ng-model="backlog" as-sortable="dragControls")
+              .well.story(ng-repeat="story in backlog" ng-click="viewStory(story)" as-sortable-item)
+                %div(data-as-sortable-item-handle)
+                  %p
+                    {{story.name}}
+
+        .col-md-6
+          .panel.panel-default
+            .panel-heading
+              %h3.panel-title.text-center
+                Icebox
+                %span.glyphicon.glyphicon-plus.pull-right(ng-click="addStoryModal(false)")
+            .panel-body(ng-model="icebox" as-sortable="dragControls")
+              .well.story(ng-repeat="story in icebox" ng-click="viewStory(story)" as-sortable-item)
+                %div(data-as-sortable-item-handle)
+                  %p
+                    {{story.name}}
