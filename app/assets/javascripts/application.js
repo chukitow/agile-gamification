@@ -23,4 +23,5 @@
 //= require angular-ui-notification
 //= require angular-xeditable
 //= require ng-sortable
+//= require underscore
 //= require_tree .

@@ -28,6 +28,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular-ui-notification'
   gem 'rails-assets-angular-xeditable'
   gem 'rails-assets-ng-sortable'
+  gem 'rails-assets-underscore'
 end
 
 group :development, :test do
