@@ -1,11 +1,15 @@
 class Api::V1::StoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project
-  before_action :set_story, only: [:update, :destroy, :move]
+  before_action :set_story, only: [:show, :update, :destroy, :move]
   respond_to :json
 
   def index
     render json: @project.stories.order(position: :asc), status: :ok
+  end
+
+  def show
+    render json: @story, status: :ok
   end
 
   def create
@@ -51,6 +55,6 @@ class Api::V1::StoriesController < ApplicationController
   end
 
   def story_params
-    params.require(:story).permit(:name, :description, :project_id);
+    params.require(:story).permit(:name, :description, :project_id, :priority);
   end
 end
