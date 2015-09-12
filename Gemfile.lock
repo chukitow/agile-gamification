@@ -228,6 +228,7 @@ GEM
     rails-assets-ng-token-auth (0.0.27)
       rails-assets-angular (>= 1.2.0)
       rails-assets-angular-cookie (>= 4.0.6)
+    rails-assets-underscore (1.8.3)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -364,6 +365,7 @@ DEPENDENCIES
   rails-assets-bootstrap!
   rails-assets-ng-sortable!
   rails-assets-ng-token-auth!
+  rails-assets-underscore!
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
