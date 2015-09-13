@@ -1,5 +1,5 @@
 class Story < ActiveRecord::Base
   acts_as_list scope: [:priority]
   belongs_to :project
-  has_many :comments
+  has_many :comments, dependent: :destroy
 end
