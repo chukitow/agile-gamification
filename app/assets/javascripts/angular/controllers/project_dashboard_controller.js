@@ -3,9 +3,9 @@
     .module('agilegamification')
     .controller('ProjectDashboardController', ProjectDashboardController);
 
-    ProjectDashboardController.$inject = ['$scope','$modal', '$routeParams', 'Project', 'Story', 'Notification'];
+    ProjectDashboardController.$inject = ['$scope','$modal', '$routeParams', 'Project', 'Story', 'Notification', '$auth'];
 
-    function ProjectDashboardController($scope, $modal, $routeParams, Project, Story, Notification){
+    function ProjectDashboardController($scope, $modal, $routeParams, Project, Story, Notification, $auth){
       $scope.addStoryModal = addStoryModal;
       $scope.createStory   = createStory;
       $scope.viewStory     = viewStory;
@@ -30,6 +30,7 @@
       $scope.panels          = [];
       $scope.isActivePanel   = isActivePanel;
       $scope.togglePanel     = togglePanel;
+      $scope.user            = $auth.user;
 
       function addStoryModal(priority){
         $scope.story = new Story({
