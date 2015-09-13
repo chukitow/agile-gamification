@@ -115,23 +115,23 @@
             %i.fa.fa-fw.fa-plus
             Add story
         %li(ng-class="isActivePanel('my_work') ? 'active' : ''")
-          %a(ng-click="tooglePanel('my_work')")
+          %a(ng-click="togglePanel('my_work')")
             %i.fa.fa-fw.fa-inbox
             My work
         %li(ng-class="isActivePanel('current') ? 'active' : ''")
-          %a(ng-click="tooglePanel('current')")
+          %a(ng-click="togglePanel('current')")
             %i.fa.fa-fw.fa-list-ul
             Current
         %li(ng-class="isActivePanel('backlog') ? 'active' : ''")
-          %a(ng-click="tooglePanel('backlog')")
+          %a(ng-click="togglePanel('backlog')")
             %i.fa.fa-fw.fa-list-ul
             Backlog
         %li(ng-class="isActivePanel('icebox') ? 'active' : ''")
-          %a(ng-click="tooglePanel('icebox')")
+          %a(ng-click="togglePanel('icebox')")
             %i.fa.fa-fw.fa-spinner
             Icebox
         %li(ng-class="isActivePanel('done') ? 'active' : ''")
-          %a(ng-click="tooglePanel('done')")
+          %a(ng-click="togglePanel('done')")
             %i.fa.fa-fw.fa-check
             Done
 

@@ -29,7 +29,7 @@
 
       $scope.panels          = [];
       $scope.isActivePanel   = isActivePanel;
-      $scope.tooglePanel     = tooglePanel;
+      $scope.togglePanel     = togglePanel;
 
       function addStoryModal(priority){
         $scope.story = new Story({
@@ -103,7 +103,7 @@
         return _.contains($scope.panels, panel);
       }
 
-      function tooglePanel(panel){
+      function togglePanel(panel){
         if(_.contains($scope.panels, panel)){
           $scope.panels = _.without($scope.panels, panel);
         }else{
