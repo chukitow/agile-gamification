@@ -47,8 +47,8 @@
       }
 
       function createStory(story){
-        story.$save(function(story){
-          $scope.$emit('story:created', story);
+        story.$save(function(res){
+          $scope.$emit('story:created', res.story);
           modalInstance.close();
         });
       }
@@ -63,11 +63,14 @@
       }
 
       function updateStory(story){
-        story.$update(function(story){
-        });
+        story = new Story(story);
+
+        story.$update();
       }
 
       function removeStory(story){
+        story = new Story(story);
+
         if(confirm('Are you sure?')){
           story.$delete(function(res){
             var index = $scope.stories.indexOf(story);
