@@ -69,10 +69,10 @@
       }
 
       function removeStory(story){
-        story = new Story(story);
+        resource = new Story(story);
 
         if(confirm('Are you sure?')){
-          story.$delete(function(res){
+          resource.$delete(function(res){
             var index = $scope.stories.indexOf(story);
             $scope.stories.splice(index, 1);
             $scope.$emit('story:deleted', story);
@@ -93,13 +93,17 @@
         var story       = event.source.itemScope.story;
         story.priority  = priority;
 
-        story.$update(function(){
+        story = new Story(story);
+
+        story.$update(function(res){
+          story = new Story(res.story);
           story.$move({ position: event.dest.index + 1});
         });
       }
 
       function orderChanged(event){
         var story = event.source.itemScope.story;
+        story     = new Story(story);
         story.$move({ position: event.dest.index + 1});
       }
 
