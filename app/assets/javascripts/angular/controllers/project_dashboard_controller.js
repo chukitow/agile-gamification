@@ -120,10 +120,12 @@
       }
 
       function openPanel(panel){
-        if($scope.panels.length >= 2){
-          $scope.panels.splice(0, 1);
+        if(!_.contains($scope.panels, panel)){
+          if($scope.panels.length >= 2){
+            $scope.panels.splice(0, 1);
+          }
+          $scope.panels.push(panel);
         }
-        $scope.panels.push(panel);
       }
 
       $scope.$on('story:created', function(event, story){
