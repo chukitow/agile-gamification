@@ -5,7 +5,12 @@ class Api::V1::StoriesController < ApplicationController
   respond_to :json
 
   def index
-    render json: @project.stories.order(position: :asc), status: :ok
+    stories = ActiveModel::ArraySerializer.new(
+      @project.stories.order(position: :asc),
+      each_serializer: StorySerializer
+    )
+
+    render json: stories, status: :ok
   end
 
   def show
@@ -16,7 +21,7 @@ class Api::V1::StoriesController < ApplicationController
     story = @project.stories.new(story_params)
 
     if story.save
-      render json: story, status: :created
+      render json: story, status: :created, serializer: StorySerializer
     else
       render json: story.errors, status: :unprocessable_entity
     end
