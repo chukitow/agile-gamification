@@ -114,50 +114,82 @@
           %a(href="#" ng-click="addStoryModal(false)")
             %i.fa.fa-fw.fa-plus
             Add story
-        %li
-          %a{:href => "#"}
+        %li(ng-class="isActivePanel('my_work') ? 'active' : ''")
+          %a(ng-click="togglePanel('my_work')")
             %i.fa.fa-fw.fa-inbox
             My work
-        %li
-          %a{:href => "#"}
+        %li(ng-class="isActivePanel('current') ? 'active' : ''")
+          %a(ng-click="togglePanel('current')")
             %i.fa.fa-fw.fa-list-ul
             Current
-        %li
-          %a{:href => "#"}
+        %li(ng-class="isActivePanel('backlog') ? 'active' : ''")
+          %a(ng-click="togglePanel('backlog')")
             %i.fa.fa-fw.fa-list-ul
             Backlog
-        %li
-          %a{:href => "#"}
+        %li(ng-class="isActivePanel('icebox') ? 'active' : ''")
+          %a(ng-click="togglePanel('icebox')")
             %i.fa.fa-fw.fa-spinner
             Icebox
-        %li
-          %a{:href => "#"}
+        %li(ng-class="isActivePanel('done') ? 'active' : ''")
+          %a(ng-click="togglePanel('done')")
             %i.fa.fa-fw.fa-check
             Done
 
   #page-wrapper
     .container-fluid
-      .row
-        .col-md-6
+      .roj
+        .col-md-6(ng-show="isActivePanel('backlog')")
           .panel.panel-default
             .panel-heading
               %h3.panel-title.text-center
+                %span.glyphicon.glyphicon-list
                 Backlog
-                %span.glyphicon.glyphicon-plus.pull-right(ng-click="addStoryModal(true)")
+                %span.glyphicon.glyphicon-plus.pull-right.cursor-pointer(ng-click="addStoryModal(true)")
             .panel-body(ng-model="backlog" as-sortable="dragControls")
               .well.story(ng-repeat="story in backlog" ng-click="viewStory(story)" as-sortable-item)
                 %div(data-as-sortable-item-handle)
                   %p
                     {{story.name}}
 
-        .col-md-6
+        .col-md-6(ng-show="isActivePanel('icebox')")
           .panel.panel-default
             .panel-heading
               %h3.panel-title.text-center
+                %i.fa.fa-fw.fa-spinner
                 Icebox
-                %span.glyphicon.glyphicon-plus.pull-right(ng-click="addStoryModal(false)")
+                %span.glyphicon.glyphicon-plus.pull-right.cursor-pointer(ng-click="addStoryModal(false)")
             .panel-body(ng-model="icebox" as-sortable="dragControls")
               .well.story(ng-repeat="story in icebox" ng-click="viewStory(story)" as-sortable-item)
                 %div(data-as-sortable-item-handle)
                   %p
                     {{story.name}}
+
+        .col-md-6(ng-show="isActivePanel('my_work')")
+          .panel.panel-default
+            .panel-heading
+              %h3.panel-title.text-center
+                %span.glyphicon.glyphicon-inbox
+                My work
+            .panel-body
+
+        .col-md-6(ng-show="isActivePanel('current')")
+          .panel.panel-default
+            .panel-heading
+              %h3.panel-title.text-center
+                %span.glyphicon.glyphicon-list
+                Current
+            .panel-body
+
+        .col-md-6(ng-show="isActivePanel('done')")
+          .panel.panel-default
+            .panel-heading
+              %h3.panel-title.text-center
+                %i.fa.fa-fw.fa-check
+                Done
+            .panel-body
+
+        .col-md-12(ng-show="panels.length == 0")
+          .jumbotron.vertical-center
+            .container
+              %h1.text-center
+                There are no panels open

@@ -27,6 +27,10 @@
 
       var modalInstance;
 
+      $scope.panels          = [];
+      $scope.isActivePanel   = isActivePanel;
+      $scope.togglePanel     = togglePanel;
+
       function addStoryModal(priority){
         $scope.story = new Story({
           project_id: $scope.project.id,
@@ -95,12 +99,32 @@
         story.$move({ position: event.dest.index + 1});
       }
 
+      function isActivePanel(panel){
+        return _.contains($scope.panels, panel);
+      }
+
+      function togglePanel(panel){
+        if(_.contains($scope.panels, panel)){
+          $scope.panels = _.without($scope.panels, panel);
+        }else{
+          openPanel(panel);
+        }
+      }
+
+      function openPanel(panel){
+        if($scope.panels.length >= 2){
+          $scope.panels.splice(0, 1);
+        }
+        $scope.panels.push(panel);
+      }
+
       $scope.$on('story:created', function(event, story){
         if(story.priority){
           $scope.backlog.push(story);
         }
         else{
           $scope.icebox.push(story);
+          openPanel('icebox');
         }
       });
 
