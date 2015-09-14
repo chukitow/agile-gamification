@@ -60,6 +60,8 @@ class Api::V1::StoriesController < ApplicationController
   end
 
   def story_params
-    params.require(:story).permit(:name, :description, :project_id, :priority);
+    params
+    .require(:story)
+    .permit(:name, :description, :project_id, :priority, :estimation);
   end
 end
