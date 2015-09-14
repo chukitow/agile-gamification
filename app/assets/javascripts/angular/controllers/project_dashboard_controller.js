@@ -54,6 +54,8 @@
       }
 
       function viewStory(story){
+        $scope.story = story;
+
         modalInstance = $modal.open({
           animation: false,
           templateUrl: 'stories/show.html',
