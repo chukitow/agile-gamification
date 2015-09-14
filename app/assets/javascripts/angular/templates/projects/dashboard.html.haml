@@ -148,8 +148,12 @@
             .panel-body(ng-model="backlog" as-sortable="dragControls")
               .well.story(ng-repeat="story in backlog" ng-click="viewStory(story)" as-sortable-item)
                 %div(data-as-sortable-item-handle)
-                  %p
-                    {{story.name}}
+                  .row
+                    .col-md-8
+                      %p
+                        %span.badge(ng-show="story.estimation")
+                          {{story.estimation}}
+                        {{story.name}}
 
         .col-md-6(ng-show="isActivePanel('icebox')")
           .panel.panel-default
@@ -162,6 +166,8 @@
               .well.story(ng-repeat="story in icebox" ng-click="viewStory(story)" as-sortable-item)
                 %div(data-as-sortable-item-handle)
                   %p
+                    %span.badge(ng-show="story.estimation")
+                      {{story.estimation}}
                     {{story.name}}
 
         .col-md-6(ng-show="isActivePanel('my_work')")

@@ -11,6 +11,7 @@
       $scope.viewStory     = viewStory;
       $scope.updateStory   = updateStory;
       $scope.removeStory   = removeStory;
+      $scope.estimateStory = estimateStory;
       $scope.project       = Project.get({ id: $routeParams.id });
       $scope.stories       = Story.query({ project_id: $routeParams.id },
         function(stories){
@@ -54,6 +55,8 @@
       }
 
       function viewStory(story){
+        $scope.story = story;
+
         modalInstance = $modal.open({
           animation: false,
           templateUrl: 'stories/show.html',
@@ -81,6 +84,11 @@
             modalInstance.close();
           });
         }
+      }
+
+      function estimateStory(points){
+        $scope.story.estimation = points;
+        $scope.updateStory($scope.story);
       }
 
       function dropAccept(sourceItemHandleScope, destSortableScope){
