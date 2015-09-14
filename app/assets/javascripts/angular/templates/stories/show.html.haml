@@ -4,14 +4,43 @@
 .modal-body
   .row
     .col-md-8
-      .description.well
-        %strong
-          Description
-        %a(ng-click="editForm.$show()" ng-hide="editForm.$visible")
-          Edit
-        %div
-          %span(editable-textarea="story.description" e-rows="7" e-cols="40" onaftersave="updateStory(story)" e-form="editForm")
-            {{story.description || 'No description'}}
+      %section
+        .description.well
+          %strong
+            Description
+          %a(ng-click="editForm.$show()" ng-hide="editForm.$visible")
+            Edit
+          %div
+            %span(editable-textarea="story.description" e-rows="7" e-cols="40" onaftersave="updateStory(story)" e-form="editForm")
+              {{story.description || 'No description'}}
+
+
+      %section(ng-controller="CommentsController")
+        %h2.page-header Comments
+        %section.comment-list
+          / First Comment
+          %article.row(ng-repeat="comment in story.comments")
+            .col-md-2.col-sm-2.hidden-xs
+              %figure.thumbnail
+                %img.img-responsive{:src => "http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg"}/
+            .col-md-10.col-sm-10
+              .panel.panel-default.arrow.left
+                .panel-body
+                  %header.text-left
+                    .comment-user
+                      %i.fa.fa-user
+                      {{comment.user.nickname || comment.user.email}}
+                      %span.glyphicon.glyphicon-remove.pull-right.cursor-pointer(ng-click="deleteComment(comment)")
+                    %time.comment-date{:datetime => "16-12-2014 01:05"}
+                      %i.fa.fa-clock-o
+                      {{comment.created_at | date: 'MMM, d - H:mm:ss'}}
+                  .comment-post
+                    %p(editable-text="comment.content" onaftersave="updateComment(comment)")
+                      {{comment.content}}
+          #new_comment.well
+            %textarea.form-control(placeholder="Add a comment" ng-model="comment.content" ng-keyup="$event.keyCode == 13 && addComment($event, comment)")
+
+
 
     .col-md-4
       .action

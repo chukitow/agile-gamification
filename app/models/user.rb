@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :user_project
   has_many :projects, through: :user_project
+  has_many :comments
 
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable, :omniauthable

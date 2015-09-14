@@ -9,7 +9,9 @@
 
       $scope.openModal     = openModal;
       $scope.createProject = createProject;
-      $scope.projects      = Project.query();
+      Project.query(function(res){
+        $scope.projects = res.projects;
+      });
 
       var modalInstance;
 

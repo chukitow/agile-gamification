@@ -3,9 +3,9 @@
     .module('agilegamification')
     .controller('ProjectDashboardController', ProjectDashboardController);
 
-    ProjectDashboardController.$inject = ['$scope','$modal', '$routeParams', 'Project', 'Story', 'Notification'];
+    ProjectDashboardController.$inject = ['$scope','$modal', '$routeParams', 'Project', 'Story', 'Notification', '$auth'];
 
-    function ProjectDashboardController($scope, $modal, $routeParams, Project, Story, Notification){
+    function ProjectDashboardController($scope, $modal, $routeParams, Project, Story, Notification, $auth){
       $scope.addStoryModal = addStoryModal;
       $scope.createStory   = createStory;
       $scope.viewStory     = viewStory;
@@ -30,6 +30,7 @@
       $scope.panels          = [];
       $scope.isActivePanel   = isActivePanel;
       $scope.togglePanel     = togglePanel;
+      $scope.user            = $auth.user;
 
       function addStoryModal(priority){
         $scope.story = new Story({
@@ -46,8 +47,8 @@
       }
 
       function createStory(story){
-        story.$save(function(story){
-          $scope.$emit('story:created', story);
+        story.$save(function(res){
+          $scope.$emit('story:created', res.story);
           modalInstance.close();
         });
       }
@@ -62,13 +63,16 @@
       }
 
       function updateStory(story){
-        story.$update(function(story){
-        });
+        story = new Story(story);
+
+        story.$update();
       }
 
       function removeStory(story){
+        resource = new Story(story);
+
         if(confirm('Are you sure?')){
-          story.$delete(function(res){
+          resource.$delete(function(res){
             var index = $scope.stories.indexOf(story);
             $scope.stories.splice(index, 1);
             $scope.$emit('story:deleted', story);
@@ -89,13 +93,17 @@
         var story       = event.source.itemScope.story;
         story.priority  = priority;
 
-        story.$update(function(){
+        story = new Story(story);
+
+        story.$update(function(res){
+          story = new Story(res.story);
           story.$move({ position: event.dest.index + 1});
         });
       }
 
       function orderChanged(event){
         var story = event.source.itemScope.story;
+        story     = new Story(story);
         story.$move({ position: event.dest.index + 1});
       }
 
@@ -112,10 +120,12 @@
       }
 
       function openPanel(panel){
-        if($scope.panels.length >= 2){
-          $scope.panels.splice(0, 1);
+        if(!_.contains($scope.panels, panel)){
+          if($scope.panels.length >= 2){
+            $scope.panels.splice(0, 1);
+          }
+          $scope.panels.push(panel);
         }
-        $scope.panels.push(panel);
       }
 
       $scope.$on('story:created', function(event, story){

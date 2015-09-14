@@ -16,6 +16,7 @@ gem 'devise_token_auth'
 gem 'angular_rails_csrf'
 gem 'font-awesome-rails'
 gem 'acts_as_list'
+gem 'active_model_serializers'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular'
