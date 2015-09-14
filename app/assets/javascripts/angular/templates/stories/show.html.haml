@@ -43,6 +43,33 @@
 
 
     .col-md-4
+      #info
+        %ul.list-group
+          %li.dropdown.list-group-item
+            Points
+            %a.dropdown-toggle.pull-right{"data-toggle" => "dropdown", :href => "#"}
+              {{ story.estimation  || 'unestimated' }}
+              %span.caret
+            %ul.dropdown-menu.pull-right{:role => "menu"}
+              %li
+                %a(ng-click="estimateStory(null)")
+                  Unestimated
+              %li
+                %a(ng-click="estimateStory(1)")
+                  1 Points
+              %li
+                %a(ng-click="estimateStory(2)")
+                  2 Points
+              %li
+                %a(ng-click="estimateStory(3)")
+                  3 Points
+              %li
+                %a(ng-click="estimateStory(5)")
+                  5 Points
+              %li
+                %a(ng-click="estimateStory(8)")
+                  8 Points
+
       .action
         .action-title
           %h3 Actions
