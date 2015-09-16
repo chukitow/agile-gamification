@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+  - "2.1.3"
+script: "bundle exec rspec spec"
+addons:
+  postgresql: "9.3"
+before_script:
+- psql -c 'create database agile_gamification_test;' -U postgres

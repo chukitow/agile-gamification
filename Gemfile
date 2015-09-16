@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.1.3'
 
 gem 'rails', '4.2.3'
 gem 'pg'
@@ -17,6 +18,7 @@ gem 'angular_rails_csrf'
 gem 'font-awesome-rails'
 gem 'acts_as_list'
 gem 'active_model_serializers'
+gem 'rails_12factor', group: :production
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular'

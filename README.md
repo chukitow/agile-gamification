@@ -1,4 +1,5 @@
-# Agile Gamification
+# Agile Gamification [![Build Status](https://travis-ci.org/chukitow/agile-gamification.svg?branch=develop)](https://travis-ci.org/chukitow/agile-gamification) [![codecov.io](http://codecov.io/github/chukitow/agile-gamification/coverage.svg?branch=develop)](http://codecov.io/github/chukitow/agile-gamification?branch=develop)
+
 It's a project management tool  that use game mechanics and rewards in an agile software development setting to increase team engagement and drive desired behaviors.
 
 # Installation

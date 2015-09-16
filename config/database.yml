@@ -12,6 +12,8 @@ test:
 
 production:
   <<: *default
-  database: agile_gamification_production
-  username: agile_gamification
+  host:     <%= ENV['AGILE_GAMIFICATION_DATABASE_HOST'] %>
+  database: <%= ENV['AGILE_GAMIFICATION_DATABASE_NAME'] %>
+  username: <%= ENV['AGILE_GAMIFICATION_DATABASE_USERNAME'] %>
+  port:     <%= ENV['AGILE_GAMIFICATION_DATABASE_PORT'] %>
   password: <%= ENV['AGILE_GAMIFICATION_DATABASE_PASSWORD'] %>
