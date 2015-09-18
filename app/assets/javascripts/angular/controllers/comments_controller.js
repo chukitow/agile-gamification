@@ -7,6 +7,7 @@
 
     function CommentsController($scope, Comments){
       $scope.addComment    = addComment;
+      $scope.comments      = Comments.query({ story_id: $scope.story.id });
       $scope.updateComment = updateComment;
       $scope.deleteComment = deleteComment;
 
@@ -15,30 +16,30 @@
           return false;
         }
 
+        $event.target.value = '';
+
         comment = new Comments({
           content: comment.content,
           story_id: $scope.story.id,
           user_id: $scope.user.id
         });
 
-        comment.$save(function(res){
-          $event.target.value = '';
-          $scope.story.comments.push(res.comment);
+
+        comment.$save(function(comment){
+          $scope.comments.push(comment);
         });
       }
 
       function updateComment(comment){
-        comment = new Comments(comment);
         comment.$update();
       }
 
       function deleteComment(comment){
+        comment = new Comments(comment);
         if(confirm('Are you sure?')){
-          comment = new Comments(comment);
-
-          comment.$delete(function(res){
-            var index = $scope.story.comments.indexOf(comment);
-            $scope.story.comments.splice(index, 1);
+          comment.$delete(function(comment){
+            var index = $scope.comments.indexOf(comment);
+            $scope.comments.splice(index, 1);
           });
         }
       }
