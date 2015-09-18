@@ -36,6 +36,7 @@ end
 
 group :development, :test do
   gem 'spring'
+  gem 'rspec'
   gem 'rspec-rails'
   gem 'pry-rails'
   gem 'faker'

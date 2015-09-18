@@ -48,15 +48,14 @@
       }
 
       function createStory(story){
-        story.$save(function(res){
-          $scope.$emit('story:created', res.story);
+        story.$save(function(story){
+          $scope.$emit('story:created', story);
           modalInstance.close();
         });
       }
 
       function viewStory(story){
         $scope.story = story;
-
         modalInstance = $modal.open({
           animation: false,
           templateUrl: 'stories/show.html',
@@ -66,16 +65,12 @@
       }
 
       function updateStory(story){
-        story = new Story(story);
-
         story.$update();
       }
 
       function removeStory(story){
-        resource = new Story(story);
-
         if(confirm('Are you sure?')){
-          resource.$delete(function(res){
+          story.$delete(function(res){
             var index = $scope.stories.indexOf(story);
             $scope.stories.splice(index, 1);
             $scope.$emit('story:deleted', story);
@@ -101,17 +96,13 @@
         var story       = event.source.itemScope.story;
         story.priority  = priority;
 
-        story = new Story(story);
-
-        story.$update(function(res){
-          story = new Story(res.story);
+        story.$update(function(story){
           story.$move({ position: event.dest.index + 1});
         });
       }
 
       function orderChanged(event){
         var story = event.source.itemScope.story;
-        story     = new Story(story);
         story.$move({ position: event.dest.index + 1});
       }
 

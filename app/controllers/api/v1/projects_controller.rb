@@ -4,11 +4,11 @@ class Api::V1::ProjectsController < ApplicationController
   respond_to :json
 
   def index
-    render json: current_user.projects, status: :ok
+    render json: current_user.projects, status: :ok, root: false
   end
 
   def show
-    render json: @project, status: :ok
+    render json: @project, status: :ok, root: false
   end
 
   def create

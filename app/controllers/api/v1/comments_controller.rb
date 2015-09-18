@@ -3,15 +3,20 @@ class Api::V1::CommentsController < ApplicationController
 
   respond_to :json
 
+  def index
+    story = Story.find(params[:story_id])
+    render json: story.comments, status: :ok, root: false
+  end
+
   def show
-    render json: @comment, status: :ok
+    render json: @comment, status: :ok, root: false
   end
 
   def create
     comment = Comment.new(comment_params)
 
     if comment.save
-      render json: comment, status: :created
+      render json: comment, status: :created, root: false
     else
       render json: comment.errors, status: :unprocessable_entity
     end
@@ -19,7 +24,7 @@ class Api::V1::CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      render json: @comment, status: :ok
+      render json: @comment, status: :ok, root: false
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -27,7 +32,7 @@ class Api::V1::CommentsController < ApplicationController
 
   def destroy
     if @comment.destroy
-      render json: @comment, status: :ok
+      head :no_content
     else
       render json: @comment.errors, status: :unprocessable_entity
     end

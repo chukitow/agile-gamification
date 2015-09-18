@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 describe HomeController, 'GET#index' do
   it 'renders index template' do

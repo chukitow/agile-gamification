@@ -6,3 +6,7 @@ addons:
   postgresql: "9.3"
 before_script:
 - psql -c 'create database agile_gamification_test;' -U postgres
+- bundle exec rake db:create db:migrate
+
+before_install:
+  - gem install bundler
