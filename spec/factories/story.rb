@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 FactoryGirl.define do
   factory :story do
     name        { Faker::Name.title }

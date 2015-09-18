@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 describe Api::V1::ProjectsController, 'GET#index' do
   let(:user) { create(:user_with_project) }

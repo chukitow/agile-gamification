@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 FactoryGirl.define do
   factory :comment do
     content { Faker::Lorem.sentence }

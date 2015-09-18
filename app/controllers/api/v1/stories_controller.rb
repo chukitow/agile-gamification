@@ -5,7 +5,7 @@ class Api::V1::StoriesController < ApplicationController
   respond_to :json
 
   def index
-    render json: @project.stories, status: :ok, root: false
+    render json: @project.stories.order(position: :asc), status: :ok, root: false
   end
 
   def show

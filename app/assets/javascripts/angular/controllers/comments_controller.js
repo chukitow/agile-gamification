@@ -35,7 +35,6 @@
       }
 
       function deleteComment(comment){
-        comment = new Comments(comment);
         if(confirm('Are you sure?')){
           comment.$delete(function(comment){
             var index = $scope.comments.indexOf(comment);
