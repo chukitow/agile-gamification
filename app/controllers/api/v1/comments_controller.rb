@@ -3,6 +3,11 @@ class Api::V1::CommentsController < ApplicationController
 
   respond_to :json
 
+  def index
+    story = Story.find(params[:story_id])
+    render json: story.comments, status: :ok, root: false
+  end
+
   def show
     render json: @comment, status: :ok, root: false
   end
@@ -27,7 +32,7 @@ class Api::V1::CommentsController < ApplicationController
 
   def destroy
     if @comment.destroy
-      render json: @comment, status: :ok
+      head :no_content
     else
       render json: @comment.errors, status: :unprocessable_entity
     end

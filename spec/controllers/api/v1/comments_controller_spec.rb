@@ -1,5 +1,25 @@
 require 'rails_helper'
 
+describe Api::V1::CommentsController, 'GET#index' do
+  let(:user)    { create(:user) }
+  let(:story)   { create(:story_with_comments) }
+  let(:comments) do
+    ActiveModel::ArraySerializer.new(
+      story.comments,
+      each_serializer: CommentSerializer
+    )
+  end
+
+  before do
+    sign_in(user)
+    get :index, story_id: story.id
+  end
+
+  it 'retrives all the story comments' do
+    expect(response.body).to eq(comments.to_json)
+  end
+end
+
 describe Api::V1::CommentsController, 'GET#show' do
   let(:user)    { create(:user) }
   let(:story)   { create(:story_with_comments) }
