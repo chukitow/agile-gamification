@@ -5,12 +5,7 @@ class Api::V1::StoriesController < ApplicationController
   respond_to :json
 
   def index
-    stories = ActiveModel::ArraySerializer.new(
-      @project.stories.order(position: :asc),
-      each_serializer: StorySerializer
-    )
-
-    render json: stories, status: :ok
+    render json: @project.stories, status: :ok, root: false
   end
 
   def show
@@ -21,7 +16,7 @@ class Api::V1::StoriesController < ApplicationController
     story = @project.stories.new(story_params)
 
     if story.save
-      render json: story, status: :created, serializer: StorySerializer
+      render json: story, status: :created, serializer: StorySerializer, root: false
     else
       render json: story.errors, status: :unprocessable_entity
     end
@@ -29,7 +24,7 @@ class Api::V1::StoriesController < ApplicationController
 
   def update
     if @story.update(story_params)
-      render json: @story, status: :ok
+      render json: @story, status: :ok, root: false
     else
       render json: @story.errors, status: :unprocessable_entity
     end
@@ -37,7 +32,7 @@ class Api::V1::StoriesController < ApplicationController
 
   def destroy
     if @story.destroy
-      render json: @story, status: :ok
+      head :no_content
     else
       render json: @story.errors, status: :unprocessable_entity
     end
@@ -47,7 +42,7 @@ class Api::V1::StoriesController < ApplicationController
     position = params[:position].to_i
     @story.insert_at(position)
 
-    render json: @story, status: :ok
+    render json: @story, status: :ok, root: false
   end
 
   private
