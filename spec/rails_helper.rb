@@ -33,4 +33,6 @@ RSpec.configure do |config|
   Capybara.default_driver =  :webkit
   config.include FactoryGirl::Syntax::Methods
   config.infer_spec_type_from_file_location!
+
+  config.include Devise::TestHelpers, type: :controller
 end
