@@ -11,10 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914005254) do
+ActiveRecord::Schema.define(version: 20150919222828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -40,8 +44,10 @@ ActiveRecord::Schema.define(version: 20150914005254) do
     t.integer "position"
     t.boolean "priority",    default: false
     t.integer "estimation"
+    t.integer "category_id"
   end
 
+  add_index "stories", ["category_id"], name: "index_stories_on_category_id", using: :btree
   add_index "stories", ["project_id"], name: "index_stories_on_project_id", using: :btree
 
   create_table "user_projects", force: :cascade do |t|
