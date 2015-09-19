@@ -32,6 +32,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular-xeditable'
   gem 'rails-assets-ng-sortable'
   gem 'rails-assets-underscore'
+  gem 'rails-assets-angular-mocks'
 end
 
 group :development, :test do
@@ -43,6 +44,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem "better_errors"
   gem 'cucumber-api-steps', require: false
+  gem 'jasmine-rails'
 end
 
 group :test do

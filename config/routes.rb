@@ -21,5 +21,6 @@ Rails.application.routes.draw do
   root 'home#index'
 
   mount_devise_token_auth_for 'User', at: 'api/auth'
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   get '/*all', to: 'home#index'
 end
