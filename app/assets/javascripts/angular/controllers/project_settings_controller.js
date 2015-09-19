@@ -12,7 +12,7 @@
 
       function updateProject(project){
         project.$update({ id: project.id}, function(res){
-          Notification('Settings updated');
+          Notification.success('Settings updated');
         });
       }
 
