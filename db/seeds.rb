@@ -2,7 +2,7 @@
   Category.create({name: name})
 end
 
-['Unestarted', 'Started', 'Finished',
+['Unstarted', 'Started', 'Finished',
  'Delivered', 'Rejected', 'Accepted'].each do |state|
   StoryState.create({name: state})
 end

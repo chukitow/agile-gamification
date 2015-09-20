@@ -8,9 +8,14 @@ class Story < ActiveRecord::Base
   validates_presence_of :name
 
   before_create :assigns_category
+  before_create :mark_as_unstarted
 
   private
   def assigns_category
     self.category = Category.find_or_initialize_by(name: 'Feature')
+  end
+
+  def mark_as_unstarted
+    self.state = StoryState.find_or_initialize_by(name: 'Unstarted')
   end
 end
