@@ -57,7 +57,7 @@
           %li.dropdown.list-group-item
             Points
             %a.dropdown-toggle.pull-right{"data-toggle" => "dropdown", :href => "#"}
-              {{ story.estimation  || 'unestimated' }}
+              {{ story.estimation  || 'Unestimated' }}
               %span.caret
             %ul.dropdown-menu.pull-right{:role => "menu"}
               %li
@@ -80,10 +80,21 @@
                   8 Points
           %li.dropdown.list-group-item
             State
-            %a.dropdown-toggle.pull-right{"data-toggle" => "dropdown", :href => "#"}
-              {{ story.state.name }}
-              %span.caret
-            %ul.dropdown-menu.pull-right{:role => "menu"}
+            %span.pull-right(ng-show="story.estimation")
+              %button.btn.btn-xs.btn-default(ng-show="nextState(story.state.name)" ng-click="setState(setNextState(nextState(story.state.name)))")
+                {{ nextState(story.state.name) }}
+              %button.btn.btn-xs.btn-success(ng-show="story.state.id == 4" ng-click="setState(setNextState('Accept'))")
+                Accept
+              %button.btn.btn-xs.btn-danger(ng-show="story.state.id == 4" ng-click="setState(setNextState('Reject'))")
+                Reject
+              &nbsp;
+              %a.dropdown-toggle.pull-right{"data-toggle" => "dropdown", :href => "#"}
+                {{story.state.name}}
+                %span.caret
+              %ul.dropdown-menu.pull-right{:role => "menu"}
+                %li(ng-repeat="state in storyStates")
+                  %a(ng-click="setState(state)")
+                    {{state.name}}
 
       .action
         .action-title

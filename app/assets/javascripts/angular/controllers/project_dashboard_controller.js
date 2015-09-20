@@ -3,9 +3,9 @@
     .module('agilegamification')
     .controller('ProjectDashboardController', ProjectDashboardController);
 
-    ProjectDashboardController.$inject = ['$scope','$modal', '$routeParams', 'Project', 'Story', 'Notification', '$auth', 'Category'];
+    ProjectDashboardController.$inject = ['$scope','$modal', '$routeParams', 'Project', 'Story', 'Notification', '$auth', 'Category', 'StoryState'];
 
-    function ProjectDashboardController($scope, $modal, $routeParams, Project, Story, Notification, $auth, Category){
+    function ProjectDashboardController($scope, $modal, $routeParams, Project, Story, Notification, $auth, Category, StoryState){
       $scope.addStoryModal = addStoryModal;
       $scope.createStory   = createStory;
       $scope.viewStory     = viewStory;
@@ -22,6 +22,7 @@
           $scope.icebox  = _.where(stories, { priority: false });
         }
       );
+      $scope.storyStates   = StoryState.query();
 
       $scope.dragControls  = {
         accept: dropAccept,
@@ -35,6 +36,9 @@
       $scope.isActivePanel   = isActivePanel;
       $scope.togglePanel     = togglePanel;
       $scope.user            = $auth.user;
+      $scope.nextState       = nextState;
+      $scope.setState        = setState;
+      $scope.setNextState    = setNextState;
 
       function addStoryModal(priority){
         $scope.story = new Story({
@@ -94,6 +98,38 @@
           $scope.story = story;
         });
       }
+
+      function nextState(state){
+        var nextState;
+        switch(state){
+          case 'Unstarted':
+            nextState = 'Start';
+            break;
+
+          case 'Started':
+            nextState = 'Finish';
+            break;
+
+          case 'Finished':
+            nextState = 'Deliver';
+            break;
+        }
+
+        return nextState;
+      }
+
+      function setState(state){
+        if(state){
+          $scope.story.$mark_as({ state_id: state.id}, function(story){
+            $scope.story = story;
+          });
+        }
+      }
+
+      function setNextState(state){
+        $scope.setState(_.where($scope.storyStates, { name: state + 'ed'})[0]);
+      }
+
 
       function dropAccept(sourceItemHandleScope, destSortableScope){
         return true;

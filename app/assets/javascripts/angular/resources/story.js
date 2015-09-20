@@ -22,6 +22,10 @@
         change_category: {
           method: 'PUT',
           url: '/api/v1/projects/:project_id/stories/:id/change_category'
+        },
+        mark_as: {
+          method: 'PUT',
+          url: '/api/v1/projects/:project_id/stories/:id/mark_as'
         }
       });
     }
