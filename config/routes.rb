@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         resources :stories do
           member do
             put :move
+            put :change_category
           end
         end
       end
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
         resources :comments
       end
 
+      resources :categories, only: [:index]
     end
   end
 

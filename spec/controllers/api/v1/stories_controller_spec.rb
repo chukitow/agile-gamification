@@ -139,3 +139,26 @@ describe Api::V1::StoriesController, 'PUT#move' do
     expect(response.body).to eq(story.to_json)
   end
 end
+
+describe Api::V1::StoriesController, 'PUT#change_category' do
+  let(:user)     { create(:user) }
+  let(:project)  { create(:project_with_stories) }
+  let(:story)    { project.stories.last }
+  let(:category) { create(:category, :bug) }
+
+  before do
+    sign_in(user)
+    put :change_category, project_id: project.id,
+      id: story.id, category_id: category.id
+  end
+
+  it 'changes the story category' do
+    expect(story.reload.category).to eq(category)
+  end
+
+  it 'retrives the story' do
+    response_story      = StorySerializer.new(assigns(:story))
+    response_story.root = false
+    expect(response.body).to eq(response_story.to_json)
+  end
+end
