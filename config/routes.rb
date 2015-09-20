@@ -8,6 +8,7 @@ Rails.application.routes.draw do
           member do
             put :move
             put :change_category
+            put :mark_as
           end
         end
       end
