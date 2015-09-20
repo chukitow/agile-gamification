@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       end
 
       resources :categories, only: [:index]
+      resources :story_states, only: [:index]
     end
   end
 

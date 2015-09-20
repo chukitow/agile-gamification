@@ -78,6 +78,12 @@
               %li
                 %a(ng-click="estimateStory(8)")
                   8 Points
+          %li.dropdown.list-group-item
+            State
+            %a.dropdown-toggle.pull-right{"data-toggle" => "dropdown", :href => "#"}
+              {{ story.state.name }}
+              %span.caret
+            %ul.dropdown-menu.pull-right{:role => "menu"}
 
       .action
         .action-title
