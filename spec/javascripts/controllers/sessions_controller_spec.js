@@ -9,6 +9,9 @@
       scope    = $rootScope.$new();
       location = $location;
 
+      $http.whenGET('/api/auth/validate_token')
+      .respond(200, { email: 'test@example.com' });
+
       $controller('SessionsController', { $scope: scope });
     }));
 

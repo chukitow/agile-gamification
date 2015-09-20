@@ -18,6 +18,10 @@
         move: {
           method: 'PUT',
           url: '/api/v1/projects/:project_id/stories/:id/move'
+        },
+        change_category: {
+          method: 'PUT',
+          url: '/api/v1/projects/:project_id/stories/:id/change_category'
         }
       });
     }

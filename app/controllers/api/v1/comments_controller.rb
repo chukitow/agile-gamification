@@ -1,4 +1,5 @@
 class Api::V1::CommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_comment, only: [:show, :update, :destroy]
 
   respond_to :json

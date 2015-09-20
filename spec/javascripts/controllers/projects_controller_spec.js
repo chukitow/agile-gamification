@@ -11,6 +11,9 @@
       location = $location;
       Project  = $injector.get('Project');
 
+      $http.whenGET('/api/auth/validate_token')
+      .respond(200, { email: 'test@example.com' });
+
       $controller('ProjectsController', { $scope: scope });
 
       var projects = [

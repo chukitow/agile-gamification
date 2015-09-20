@@ -1,6 +1,6 @@
 (function(){
   describe('ProjectDashboardController', function(){
-    var scope, $http, location, createController, Project, Story;
+    var scope, $http, location, createController, Project, Story, Category;
 
     beforeEach(module('agilegamification'));
 
@@ -11,17 +11,25 @@
       Project       = $injector.get('Project');
       notification  = $injector.get('Notification');
       Story         = $injector.get('Story');
+      Category      = $injector.get('Category');
+
+      $http.whenGET('/api/auth/validate_token')
+      .respond(200, { email: 'test@example.com' });
 
       $controller('ProjectDashboardController', {
         $scope: scope,
         $routeParams: { id: 1 }
       });
 
-      $http.expectGET("/api/v1/projects/1") 
+      $http.expectGET("/api/v1/projects/1")
         .respond(200, {id: 1, name: 'Project 1'});
 
-      $http.expectGET("/api/v1/projects/1/stories") 
+      $http.whenGET("/api/v1/categories")
+        .respond(200, [{ id: 1, name: 'Feature'}]);
+
+      $http.expectGET("/api/v1/projects/1/stories")
         .respond(200, [{ id: 1, name: 'Story 1', priority: true }]);
+
 
       $http.flush();
 
@@ -151,5 +159,46 @@
 
       expect(scope.panels).toEqual([]);
     });
+
+    it('sets a category', function(){
+      var category = new Category({id: 2, name: 'Bug'});
+
+      var story = new Story({
+        id: 2,
+        project_id: 1,
+        priority: true,
+        name: 'Story',
+        category: {
+          id: 1,
+          name: 'Feature'
+        }
+      });
+
+      var expected_story = new Story({
+        id: 2,
+        project_id: 1,
+        priority: true,
+        name: 'Story',
+        category: {
+          id: 2,
+          name: 'Bug'
+        }
+      });
+
+      $http.expectGET('/api/v1/stories/2/comments')
+        .respond([{}]);
+
+      scope.viewStory(story);
+      $http.flush();
+
+      $http.expectPUT('/api/v1/projects/1/stories/2/change_category?category_id=2')
+        .respond(200, expected_story);
+
+      scope.setCategory(category);
+      $http.flush();
+
+      expect(scope.story.category.name).toEqual('Bug');
+    });
+
   });
 })();

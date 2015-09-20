@@ -1,7 +1,7 @@
 class Api::V1::StoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project
-  before_action :set_story, only: [:show, :update, :destroy, :move]
+  before_action :set_story, only: [:show, :update, :destroy, :move, :change_category]
   respond_to :json
 
   def index
@@ -43,6 +43,15 @@ class Api::V1::StoriesController < ApplicationController
     @story.insert_at(position)
 
     render json: @story, status: :ok, root: false
+  end
+
+  def change_category
+    @story.category = Category.find(params[:category_id])
+    if @story.save
+      render json: @story, status: :ok, root: false
+    else
+      render json: @story.errors, status: :unprocessable_entity
+    end
   end
 
   private

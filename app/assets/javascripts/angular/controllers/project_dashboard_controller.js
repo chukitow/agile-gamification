@@ -3,17 +3,20 @@
     .module('agilegamification')
     .controller('ProjectDashboardController', ProjectDashboardController);
 
-    ProjectDashboardController.$inject = ['$scope','$modal', '$routeParams', 'Project', 'Story', 'Notification', '$auth'];
+    ProjectDashboardController.$inject = ['$scope','$modal', '$routeParams', 'Project', 'Story', 'Notification', '$auth', 'Category'];
 
-    function ProjectDashboardController($scope, $modal, $routeParams, Project, Story, Notification, $auth){
+    function ProjectDashboardController($scope, $modal, $routeParams, Project, Story, Notification, $auth, Category){
       $scope.addStoryModal = addStoryModal;
       $scope.createStory   = createStory;
       $scope.viewStory     = viewStory;
       $scope.updateStory   = updateStory;
       $scope.removeStory   = removeStory;
       $scope.estimateStory = estimateStory;
+      $scope.setCategory   = setCategory;
       $scope.project       = Project.get({ id: $routeParams.id });
+      $scope.categories    = Category.query();
       $scope.stories       = Story.query({ project_id: $routeParams.id },
+
         function(stories){
           $scope.backlog = _.where(stories, { priority: true });
           $scope.icebox  = _.where(stories, { priority: false });
@@ -84,6 +87,12 @@
       function estimateStory(points){
         $scope.story.estimation = points;
         $scope.updateStory($scope.story);
+      }
+
+      function setCategory(category){
+        $scope.story.$change_category({ category_id: category.id}, function(story){
+          $scope.story = story;
+        });
       }
 
       function dropAccept(sourceItemHandleScope, destSortableScope){
