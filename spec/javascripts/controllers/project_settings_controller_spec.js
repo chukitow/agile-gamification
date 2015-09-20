@@ -11,6 +11,9 @@
       Project       = $injector.get('Project');
       notification  = $injector.get('Notification');
 
+      $http.whenGET('/api/auth/validate_token')
+      .respond(200, { email: 'test@example.com' });
+
       $controller('ProjectSettingsController', {
         $scope: scope,
         $routeParams: { id: 1 }

@@ -10,6 +10,9 @@
       scope    = $rootScope.$new();
       location = $location;
 
+      $http.whenGET('/api/auth/validate_token')
+      .respond(200, { email: 'test@example.com' });
+
       $controller('RegistrationController', { $scope: scope });
     }));
 
@@ -19,7 +22,8 @@
     });
 
     it('signs up the user', function () {
-      $http.whenPOST('/api/auth')
+
+      $http.expectPOST('/api/auth')
         .respond(201, { email: 'test@example.com' });
 
       spyOn(location, 'path');

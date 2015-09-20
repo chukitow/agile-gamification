@@ -13,15 +13,21 @@
       Story         = $injector.get('Story');
       Comments      = $injector.get('Comments');
 
+      $http.whenGET('/api/auth/validate_token')
+      .respond(200, { email: 'test@example.com' });
+
       $controller('ProjectDashboardController', {
         $scope: scope,
         $routeParams: { id: 1 }
       });
 
-      $http.expectGET("/api/v1/projects/1") 
+      $http.expectGET("/api/v1/projects/1")
         .respond(200, {id: 1, name: 'Project 1'});
 
-      $http.expectGET("/api/v1/projects/1/stories") 
+      $http.whenGET("/api/v1/categories")
+        .respond(200, [{ id: 1, name: 'Feature'}]);
+
+      $http.expectGET("/api/v1/projects/1/stories")
         .respond(200, [{ id: 1, name: 'Story 1', priority: true }]);
 
       $http.flush();
