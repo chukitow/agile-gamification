@@ -4,4 +4,5 @@ class StorySerializer < ActiveModel::Serializer
     :priority, :estimation
 
   has_one :category
+  has_one :state
 end

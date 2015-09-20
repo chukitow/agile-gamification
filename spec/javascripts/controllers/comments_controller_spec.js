@@ -24,6 +24,9 @@
       $http.expectGET("/api/v1/projects/1")
         .respond(200, {id: 1, name: 'Project 1'});
 
+      $http.whenGET("/api/v1/story_states")
+        .respond(200, [{ id: 1, name: 'Unstarted'}]);
+
       $http.whenGET("/api/v1/categories")
         .respond(200, [{ id: 1, name: 'Feature'}]);
 

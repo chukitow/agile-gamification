@@ -8,6 +8,7 @@ Rails.application.routes.draw do
           member do
             put :move
             put :change_category
+            put :mark_as
           end
         end
       end
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
       end
 
       resources :categories, only: [:index]
+      resources :story_states, only: [:index]
     end
   end
 
