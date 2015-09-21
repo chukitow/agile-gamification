@@ -95,6 +95,11 @@
                 %li(ng-repeat="state in storyStates")
                   %a(ng-click="setState(state)")
                     {{state.name}}
+          %li.list-group-item
+            Owner
+            %span.pull-right
+              {{ story.owner.nickname || story.owner.email || 'Without owner'}}
+
 
       .action
         .action-title
