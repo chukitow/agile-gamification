@@ -55,8 +55,7 @@ class Api::V1::StoriesController < ApplicationController
   end
 
   def mark_as
-    @story.state = StoryState.find(params[:state_id])
-    if @story.save
+    if MarkStory.as(@story, StoryState.find(params[:state_id]), current_user)
       render json: @story, status: :ok, root: false
     else
       render json: @story.errors, status: :unprocessable_entity

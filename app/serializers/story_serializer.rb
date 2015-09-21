@@ -5,4 +5,5 @@ class StorySerializer < ActiveModel::Serializer
 
   has_one :category
   has_one :state
+  has_one :owner
 end
