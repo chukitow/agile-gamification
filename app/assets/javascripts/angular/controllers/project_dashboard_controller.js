@@ -16,10 +16,8 @@
       $scope.project       = Project.get({ id: $routeParams.id });
       $scope.categories    = Category.query();
       $scope.stories       = Story.query({ project_id: $routeParams.id },
-
         function(stories){
-          $scope.backlog = _.where(stories, { priority: true });
-          $scope.icebox  = _.where(stories, { priority: false });
+          setPanels(stories);
         }
       );
       $scope.storyStates   = StoryState.query();
@@ -33,9 +31,9 @@
       var modalInstance;
 
       $scope.panels          = [];
+      $scope.user            = $auth.user;
       $scope.isActivePanel   = isActivePanel;
       $scope.togglePanel     = togglePanel;
-      $scope.user            = $auth.user;
       $scope.nextState       = nextState;
       $scope.setState        = setState;
       $scope.setNextState    = setNextState;
@@ -56,6 +54,7 @@
 
       function createStory(story){
         story.$save(function(story){
+          $scope.stories.push(story);
           $scope.$emit('story:created', story);
           modalInstance.close();
         });
@@ -77,11 +76,11 @@
 
       function removeStory(story){
         if(confirm('Are you sure?')){
-          story.$delete(function(res){
+          story.$delete(function(story){
             var index = $scope.stories.indexOf(story);
             $scope.stories.splice(index, 1);
-            $scope.$emit('story:deleted', story);
 
+            $scope.$emit('story:deleted', story);
             Notification.success('Story removed');
             modalInstance.close();
           });
@@ -122,6 +121,7 @@
         if(state){
           $scope.story.$mark_as({ state_id: state.id}, function(story){
             $scope.story = story;
+            $scope.$emit('story:stateChanged', story);
           });
         }
       }
@@ -172,25 +172,72 @@
         }
       }
 
+      function setMyWork(stories){
+        $scope.myWork  = _.filter(stories, function(story) {
+          if(story.owner && story.owner.id == $auth.user.id){
+            return story;
+          }
+        });
+      }
+
+      function setBacklog(stories){
+        $scope.backlog = _.filter(stories, function(story){
+          if(story.priority && story.state.name == "Unstarted"){
+            return story;
+          }
+        });
+      }
+
+      function setIcebox(stories){
+        $scope.icebox = _.filter(stories, function(story){
+          if(!story.priority && story.state.name == "Unstarted"){
+            return story;
+          }
+        });
+      }
+
+      function setCurrent(stories){
+        $scope.current = _.filter(stories, function(story){
+          if(story.estimation && story.state.name != 'Unstarted' && story.state.name != 'Accepted'){
+            return story;
+          }
+        });
+      }
+
+      function setPanels(stories){
+        setBacklog(stories);
+        setIcebox(stories);
+        setMyWork(stories);
+        setCurrent(stories);
+      }
+
+      function openRightPanel(story){
+        switch(story.state.name){
+          case 'Unstarted':
+            var panel = story.priority ? 'backlog' : 'icebox';
+            openPanel(panel);
+            break;
+          case 'Started':
+            openPanel('current');
+            break;
+          case 'Accepted':
+            openPanel('done');
+            break;
+        }
+      }
+
       $scope.$on('story:created', function(event, story){
-        if(story.priority){
-          $scope.backlog.push(story);
-        }
-        else{
-          $scope.icebox.push(story);
-          openPanel('icebox');
-        }
+        setPanels($scope.stories);
+        openRightPanel(story);
       });
 
       $scope.$on('story:deleted', function(event, story){
-        if(story.priority){
-          var index = $scope.backlog.indexOf(story);
-          $scope.backlog.splice(index, 1);
-        }
-        else{
-          var index = $scope.icebox.indexOf(story);
-          $scope.icebox.splice(index, 1);
-        }
+        setPanels($scope.stories);
+      });
+
+      $scope.$on('story:stateChanged', function(event, story){
+        setPanels($scope.stories);
+        openRightPanel(story);
       });
 
     }
