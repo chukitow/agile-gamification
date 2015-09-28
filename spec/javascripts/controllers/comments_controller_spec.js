@@ -31,7 +31,7 @@
         .respond(200, [{ id: 1, name: 'Feature'}]);
 
       $http.expectGET("/api/v1/projects/1/stories")
-        .respond(200, [{ id: 1, name: 'Story 1', priority: true }]);
+        .respond(200, [{ id: 1, name: 'Story 1', priority: true, state: { name: 'Unstarted' }}]);
 
       $http.flush();
 
