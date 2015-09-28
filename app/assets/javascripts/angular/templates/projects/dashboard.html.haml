@@ -177,6 +177,12 @@
                 %span.glyphicon.glyphicon-inbox
                 My work
             .panel-body
+              .well.story(ng-repeat="story in myWork" ng-click="viewStory(story)")
+                %div
+                  %p
+                    %span.badge(ng-show="story.estimation")
+                      {{story.estimation}}
+                    {{story.name}}
 
         .col-md-6(ng-show="isActivePanel('current')")
           .panel.panel-default
@@ -185,6 +191,12 @@
                 %span.glyphicon.glyphicon-list
                 Current
             .panel-body
+              .well.story(ng-repeat="story in current" ng-click="viewStory(story)")
+                %div
+                  %p
+                    %span.badge(ng-show="story.estimation")
+                      {{story.estimation}}
+                    {{story.name}}
 
         .col-md-6(ng-show="isActivePanel('done')")
           .panel.panel-default
@@ -193,6 +205,12 @@
                 %i.fa.fa-fw.fa-check
                 Done
             .panel-body
+              .well.story(ng-repeat="story in stories | filter: { state: { name: 'Accepted' }}" ng-click="viewStory(story)")
+                %div
+                  %p
+                    %span.badge(ng-show="story.estimation")
+                      {{story.estimation}}
+                    {{story.name}}
 
         .col-md-12(ng-show="panels.length == 0")
           .jumbotron.vertical-center
