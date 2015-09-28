@@ -15,7 +15,9 @@
       StoryState    = $injector.get('StoryState');
 
       $http.whenGET('/api/auth/validate_token')
-      .respond(200, { email: 'test@example.com' });
+      .respond(200, { id: 1, email: 'test@example.com' });
+
+      var user   = { id: 1, email: 'test@example.com', signIn: true};
 
       $controller('ProjectDashboardController', {
         $scope: scope,
@@ -32,7 +34,7 @@
         .respond(200, [{ id: 1, name: 'Feature'}]);
 
       $http.whenGET("/api/v1/projects/1/stories")
-        .respond(200, [{ id: 1, name: 'Story 1', priority: true }]);
+        .respond(200, [{ id: 1, name: 'Story 1', priority: true, owner: user, state: { name: 'Unstarted'}}]);
 
       $http.flush();
     }));
@@ -73,7 +75,10 @@
       var story = new Story({
         project_id: 1,
         priority: true,
-        name: 'New story'
+        name: 'New story',
+        state: {
+          name: 'Unstarted'
+        }
       });
 
       $http.whenPOST('/api/v1/projects/1/stories')
