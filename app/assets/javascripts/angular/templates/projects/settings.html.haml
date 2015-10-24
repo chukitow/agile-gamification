@@ -1,32 +1,44 @@
 .container
   .box-container
-    .row
-      .col-md-4
-        %ul.nav.nav-pills.nav-stacked
-          %li.active
-            %a Settings
-          %li
-            %a Overview
-          %li
-            %a Members
+    %a.pull-right(ng-href="/projects/{{project.id}}/dashboard")
+      Go to the project
+    .section
+      %h4 General
+      %hr
 
-      .col-md-8
-        %a.pull-right(ng-href="/projects/{{project.id}}/dashboard")
-          Go to the project
+      .form-information
+        %form(name="settingsForm" ng-submit="updateProject(project)")
+          .form-group
+            %label Name
+            %input.form-control(type="text" ng-model="project.name" name="project_name" required="")
+          .form-group
+            %button.btn.btn-primary(type="submit" ng-disabled="settingsForm.$invalid")Save settings
+    .section
+      %h4 Members
+      %hr
+      .well
+        .row
+          .col-md-5.col-md-offset-7
+            .new-member
+              %form(ng-submit="addMember(member)")
+                %input.form-control(type="email" placeholder="Member's email address" ng-model="member.email")
+        %table.table.table-hover.table-striped
+          %thead
+            %tr
+              %th
+                Email
+              %th
+          %tbody
+            %tr(ng-repeat="member in project.users")
+              %td
+                {{member.email}}
+              %td
+                %span
+                  %button.btn.btn-default{:type => "button"} Remove
 
-        .section
-          %h4 General
-          %hr
 
-          .form-information
-            %form(name="settingsForm" ng-submit="updateProject(project)")
-              .form-group
-                %label Name
-                %input.form-control(type="text" ng-model="project.name" name="project_name" required="")
-              .form-group
-                %button.btn.btn-primary(type="submit" ng-disabled="settingsForm.$invalid")Save settings
-        .section
-          %h4 Actions
-          %hr
-          .action
-            %button.btn.btn-danger(ng-click="deleteProject(project)") Delete project
+    .section
+      %h4 Actions
+      %hr
+      .action
+        %button.btn.btn-danger(ng-click="deleteProject(project)") Delete project

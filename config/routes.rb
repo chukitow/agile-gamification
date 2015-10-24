@@ -11,6 +11,10 @@ Rails.application.routes.draw do
             put :mark_as
           end
         end
+
+        member do
+          post :add_member
+        end
       end
 
       resources :stories do

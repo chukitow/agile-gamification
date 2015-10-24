@@ -3,11 +3,12 @@
     .module('agilegamification')
     .controller('ProjectSettingsController', ProjectSettingsController);
 
-    ProjectSettingsController.$inject = ['$scope', '$routeParams', 'Project', 'Notification', '$location'];
+    ProjectSettingsController.$inject = ['$scope', '$routeParams', 'Project', 'Notification', '$location', '$auth'];
 
-    function ProjectSettingsController($scope, $routeParams, Project, Notification, $location){
+    function ProjectSettingsController($scope, $routeParams, Project, Notification, $location, $auth){
       $scope.updateProject  = updateProject;
       $scope.deleteProject  = deleteProject;
+      $scope.addMember      = addMember;
       $scope.project        = Project.get({ id: $routeParams.id });
 
       function updateProject(project){
@@ -23,6 +24,10 @@
             $location.path('/projects');
           });
         }
+      }
+
+      function addMember(member){
+        $scope.project.$add_member({ email: member.email});
       }
     }
 })();
