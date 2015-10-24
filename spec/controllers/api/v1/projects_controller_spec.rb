@@ -2,19 +2,26 @@ require 'spec_helper'
 
 describe Api::V1::ProjectsController, 'GET#index' do
   let(:user) { create(:user_with_project) }
+  let(:projects) do
+    ActiveModel::ArraySerializer.new(
+      user.projects,
+      each_serializer: ProjectSerializer
+    )
+  end
+
   before do
     sign_in(user)
-    get :index
   end
 
   it 'retrives all the user projects' do
-    expect(response.body).to eq(user.projects.to_json)
+    get :index
+    expect(response.body).to eq(projects.to_json)
   end
 end
 
 describe Api::V1::ProjectsController, 'GET#show' do
   let(:user)    { create(:user_with_project) }
-  let(:project) { user.projects.first }
+  let(:project) { ProjectSerializer.new(user.projects.first) }
 
   before do
     sign_in(user)
@@ -22,6 +29,7 @@ describe Api::V1::ProjectsController, 'GET#show' do
   end
 
   it 'retrives the requested project' do
+    project.root = false
     expect(response.body).to eq(project.to_json)
   end
 end
@@ -43,7 +51,9 @@ describe Api::V1::ProjectsController, 'POST#create' do
     end
 
     it 'retrives the project' do
-      expect(response.body).to eq(Project.last.to_json)
+      project      = ProjectSerializer.new(user.projects.last)
+      project.root = false
+      expect(response.body).to eq(project.to_json)
     end
   end
 
@@ -77,7 +87,10 @@ describe Api::V1::ProjectsController, 'PUT#update' do
     end
 
     it 'retrives the project' do
-      expect(response.body).to eq(Project.last.to_json)
+      project.reload
+      project_serializer      = ProjectSerializer.new(project)
+      project_serializer.root = false
+      expect(response.body).to eq(project_serializer.to_json)
     end
   end
 
